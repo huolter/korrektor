@@ -9,13 +9,13 @@
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
-      padding: 16px;
+      padding: 20px;
       background-color: #f8fafc;
       color: #1e293b;
     }
 
     h2 {
-      font-size: 1.125rem;
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 8px;
       color: #0f172a;
@@ -23,7 +23,7 @@
 
     .container {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       max-width: 1200px;
       margin: 0 auto;
       flex-wrap: wrap;
@@ -32,38 +32,37 @@
     .panel, .config-panel {
       background: #ffffff;
       border-radius: 12px;
-      padding: 16px;
+      padding: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-width: 100%;
-      box-sizing: border-box;
+      min-width: 300px;
     }
 
     textarea, input {
       width: 100%;
       padding: 12px;
-      font-size: 0.9375rem;
+      font-size: 15px;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       background: #f9fafb;
       resize: vertical;
       box-sizing: border-box;
       line-height: 1.5;
-      min-height: 100px;
+      min-height: 150px;
+      max-height: 300px;
     }
 
     button {
       padding: 12px;
-      font-size: 0.9375rem;
+      font-size: 15px;
       font-weight: 500;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: 0.25s;
-      min-height: 44px;
     }
 
     button:hover {
@@ -88,25 +87,23 @@
 
     .separator {
       border-top: 1px solid #e2e8f0;
-      margin: 20px auto;
+      margin: 30px auto;
       max-width: 1200px;
     }
 
     #notification {
       position: fixed;
-      top: 16px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background-color: #16a34a;
       color: white;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: 8px;
       display: none;
       z-index: 1000;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       animation: fadeInOut 2s ease-in-out;
-      max-width: 90%;
-      text-align: center;
     }
 
     @keyframes fadeInOut {
@@ -122,31 +119,31 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: white;
-      padding: 20px;
+      padding: 25px;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       z-index: 2000;
       display: none;
-      max-width: 90%;
-      width: 320px;
+      max-width: 400px;
+      width: 90%;
     }
 
     .config-section {
       max-width: 1200px;
       margin: 0 auto;
-      margin-top: 16px;
+      margin-top: 20px;
     }
 
     .footer {
       text-align: center;
-      margin-top: 32px;
-      padding: 16px;
-      font-size: 0.875rem;
-      color: #64748b;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 14px;
+      color: #64748b; /* subtle gray */
     }
 
     .footer a {
-      color: #2563eb;
+      color: #2563eb; /* same blue as your primary button */
       text-decoration: none;
       font-weight: 500;
     }
@@ -157,148 +154,64 @@
 
     #inputText,
     #outputText {
-      height: 250px;
-      min-height: 150px;
+      height: 350px;
+      min-height: 250px;
     }
 
     #popup h3 {
       margin: 0 0 10px;
-      font-size: 1rem;
+      font-size: 16px;
       font-weight: 600;
       color: #0f172a;
     }
 
     #popup p {
       margin: 5px 0;
-      font-size: 0.875rem;
+      font-size: 14px;
       color: #475569;
     }
 
     #popup button {
       background: #2563eb;
       color: white;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
-    /* Media Queries for Mobile */
+    /* 📱 Responsive tweaks */
     @media (max-width: 768px) {
-      body {
-        padding: 12px;
-      }
-
       .container {
         flex-direction: column;
-        gap: 12px;
       }
 
       .panel, .config-panel {
-        padding: 12px;
-        min-width: 100%;
-      }
-
-      h2 {
-        font-size: 1rem;
-      }
-
-      textarea, input {
-        font-size: 0.875rem;
-      }
-
-      button {
-        font-size: 0.875rem;
-        padding: 10px;
-      }
-
-      .config-section {
-        margin-top: 12px;
-      }
-
-      .footer {
-        margin-top: 24px;
-        padding: 12px;
-        font-size: 0.8125rem;
+        min-width: unset;
+        width: 100%;
       }
 
       #inputText,
       #outputText {
         height: 200px;
-        min-height: 120px;
-      }
-
-      #popup {
-        width: 90%;
-        max-width: 300px;
-        padding: 16px;
-      }
-
-      #notification {
-        font-size: 0.8125rem;
-        padding: 8px 12px;
       }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 8px;
-      }
-
-      .container {
-        gap: 8px;
-      }
-
-      .panel, .config-panel {
-        padding: 10px;
-      }
-
-      h2 {
-        font-size: 0.9375rem;
-      }
-
-      textarea, input {
-        font-size: 0.8125rem;
-      }
-
-      button {
-        font-size: 0.8125rem;
-        padding: 8px;
-        min-height: 40px;
-      }
-
       .button-container {
         flex-direction: column;
         gap: 8px;
       }
 
-      .separator {
-        margin: 16px auto;
-      }
-
-      .footer {
-        font-size: 0.75rem;
-      }
-
-      #inputText,
-      #outputText {
-        height: 150px;
-        min-height: 100px;
-      }
-
-      #popup {
-        max-width: 280px;
-        padding: 12px;
-      }
-
-      #popup h3 {
-        font-size: 0.9375rem;
-      }
-
-      #popup p {
-        font-size: 0.75rem;
+      button {
+        width: 100%;
       }
 
       #notification {
-        font-size: 0.75rem;
-        padding: 6px 10px;
+        width: 90%;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      #popup {
+        padding: 15px;
       }
     }
   </style>
@@ -348,15 +261,9 @@
     </div>
   </div>
 
-  <footer class="footer">
-    Made by <a href="https://gualterio.com/" target="_blank">Gualterio</a>
-  </footer>
-
   <script type="module">
-    // Import OpenAI SDK
     import OpenAI from 'https://cdn.jsdelivr.net/npm/openai@4.68.1/+esm';
 
-    // Load API key and prompt from localStorage on page load
     const apiKeyInput = document.getElementById('apiKey');
     const savedApiKey = localStorage.getItem('openaiApiKey');
     if (savedApiKey) {
@@ -382,12 +289,10 @@
 
     const notification = document.getElementById('notification');
 
-    // Function to close popup
     window.closePopup = function() {
       document.getElementById('popup').style.display = 'none';
     };
 
-    // Function to save API key to localStorage
     window.saveApiKey = function() {
       const apiKey = apiKeyInput.value.trim();
       if (apiKey) {
@@ -398,7 +303,6 @@
       }
     };
 
-    // Function to save prompt to localStorage
     window.savePrompt = function() {
       const prompt = promptInput.value.trim();
       if (prompt) {
@@ -409,14 +313,12 @@
       }
     };
 
-    // Function to revert to default prompt
     window.revertToDefaultPrompt = function() {
       promptInput.value = defaultPrompt;
       localStorage.removeItem('openaiPrompt');
       alert('Prompt reverted to default and saved prompt removed!');
     };
 
-    // Function to correct text using OpenAI API
     window.correctText = async function() {
       const inputText = document.getElementById('inputText').value;
       const outputTextArea = document.getElementById('outputText');
@@ -455,7 +357,6 @@
         const correctedText = response.choices[0].message.content.trim();
         outputTextArea.value = correctedText;
 
-        // Automatically copy to clipboard and show transient notification
         await navigator.clipboard.writeText(correctedText);
         notification.style.display = 'block';
         setTimeout(() => {
@@ -467,5 +368,9 @@
       }
     };
   </script>
+
+  <footer class="footer">
+    Made by <a href="https://gualterio.com/" target="_blank">Gualterio</a>
+  </footer>
 </body>
 </html>
