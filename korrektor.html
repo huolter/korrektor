@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Style Corrector</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .panel, .config-panel {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 300px;
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f9fafb;
+      resize: vertical;
+      box-sizing: border-box;
+      line-height: 1.5;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button.primary {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    button.secondary {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .separator {
+      border-top: 1px solid #e2e8f0;
+      margin: 30px auto;
+      max-width: 1200px;
+    }
+
+    #notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #16a34a;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      animation: fadeInOut 2s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      z-index: 2000;
+      display: none;
+      max-width: 400px;
+    }
+
+    .config-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 14px;
+  color: #64748b; /* subtle gray */
+}
+
+.footer a {
+  color: #2563eb; /* same blue as your primary button */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+#inputText,
+#outputText {
+  height: 350px;  /* bigger space */
+  min-height: 250px; /* ensures they stay roomy if resized */
+}
+
+
+    #popup h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    #popup p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    #popup button {
+      background: #2563eb;
+      color: white;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="notification">Corrected text copied to clipboard!</div>
+  <div id="popup">
+    <div id="popupMessage"></div>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <div class="container">
+    <div class="panel">
+      <h2>Input Text</h2>
+      <textarea id="inputText" placeholder="Paste your text or email here..."></textarea>
+      <button class="primary" onclick="correctText()">Correct Text</button>
+    </div>
+
+    <div class="panel">
+      <h2>Corrected Text</h2>
+      <textarea id="outputText" readonly placeholder="Corrected text will appear here..."></textarea>
+    </div>
+  </div>
+
+  <div class="separator"></div>
+
+<div class="config-section">
+  <div class="config-panel">
+    <h2>Configuration</h2>
+
+    <div class="prompt-section">
+      <label for="promptInput"><strong>Custom Prompt</strong></label>
+      <textarea id="promptInput" placeholder="Enter custom prompt for text correction..."></textarea>
+      <div class="button-container">
+        <button class="secondary" onclick="savePrompt()">Save Prompt</button>
+        <button class="secondary" onclick="revertToDefaultPrompt()">Revert to Default</button>
+      </div>
+    </div>
+
+    <div class="api-key-section">
+      <label for="apiKey"><strong>OpenAI API Key</strong></label>
+      <input type="text" id="apiKey" placeholder="Enter your OpenAI API Key">
+      <div class="button-container">
+        <button class="primary" onclick="saveApiKey()">Save API Key</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="module">
+    // Import OpenAI SDK
+    import OpenAI from 'https://cdn.jsdelivr.net/npm/openai@4.68.1/+esm';
+
+    // Load API key and prompt from localStorage on page load
+    const apiKeyInput = document.getElementById('apiKey');
+    const savedApiKey = localStorage.getItem('openaiApiKey');
+    if (savedApiKey) {
+      apiKeyInput.value = savedApiKey;
+    }
+
+    const promptInput = document.getElementById('promptInput');
+    const savedPrompt = localStorage.getItem('openaiPrompt');
+    const defaultPrompt = 'Check this message for correctness and style. Reply only with the corrected text for me to copy paste, no other comments, and no subject, just plain text. Add signature or greetings only if they were included in the original text';
+    const apiKeyStatus = savedApiKey ? 'A saved API key was found and will be used.' : 'No saved API key found. Please save an API key to proceed.';
+    const popupContent = document.getElementById('popupMessage');
+    if (savedPrompt) {
+      promptInput.value = savedPrompt;
+      popupContent.innerHTML = '<h3>Prompt Status</h3><p>A saved prompt was found and will be used.</p>' +
+                              '<h3>API Key Status</h3><p>' + apiKeyStatus + '</p>';
+    } else {
+      promptInput.value = defaultPrompt;
+      popupContent.innerHTML = '<h3>Prompt Status</h3><p>No saved prompt found. The default prompt will be used: ' + defaultPrompt + '.</p>' +
+                              '<h3>API Key Status</h3><p>' + apiKeyStatus + '</p>';
+    }
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+
+    const notification = document.getElementById('notification');
+
+    // Function to close popup
+    window.closePopup = function() {
+      document.getElementById('popup').style.display = 'none';
+    };
+
+    // Function to save API key to localStorage
+    window.saveApiKey = function() {
+      const apiKey = apiKeyInput.value.trim();
+      if (apiKey) {
+        localStorage.setItem('openaiApiKey', apiKey);
+        alert('API Key saved locally!');
+      } else {
+        alert('Please enter a valid API Key.');
+      }
+    };
+
+    // Function to save prompt to localStorage
+    window.savePrompt = function() {
+      const prompt = promptInput.value.trim();
+      if (prompt) {
+        localStorage.setItem('openaiPrompt', prompt);
+        alert('Prompt saved locally!');
+      } else {
+        alert('Please enter a valid prompt.');
+      }
+    };
+
+    // Function to revert to default prompt
+    window.revertToDefaultPrompt = function() {
+      promptInput.value = defaultPrompt;
+      localStorage.removeItem('openaiPrompt');
+      alert('Prompt reverted to default and saved prompt removed!');
+    };
+
+    // Function to correct text using OpenAI API
+    window.correctText = async function() {
+      const inputText = document.getElementById('inputText').value;
+      const outputTextArea = document.getElementById('outputText');
+      const apiKey = localStorage.getItem('openaiApiKey');
+      const prompt = localStorage.getItem('openaiPrompt') || defaultPrompt;
+
+      if (!apiKey) {
+        alert('Please save your OpenAI API Key first.');
+        return;
+      }
+
+      if (!inputText) {
+        alert('Please enter some text to correct.');
+        return;
+      }
+
+      outputTextArea.value = 'Processing...';
+
+      try {
+        const openai = new OpenAI({
+          apiKey: apiKey,
+          dangerouslyAllowBrowser: true
+        });
+
+        const response = await openai.chat.completions.create({
+          model: 'gpt-4o-mini',
+          messages: [
+            {
+              role: 'user',
+              content: `${prompt}\n\n${inputText}`
+            }
+          ],
+          max_tokens: 1000
+        });
+
+        const correctedText = response.choices[0].message.content.trim();
+        outputTextArea.value = correctedText;
+
+        // Automatically copy to clipboard and show transient notification
+        await navigator.clipboard.writeText(correctedText);
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 1500);
+      } catch (error) {
+        console.error('Error:', error);
+        outputTextArea.value = 'Error: Could not process the text. Please check your API key and try again.';
+      }
+    };
+  </script>
+
+
+<footer class="footer">
+  Made by <a href="https://gualterio.com/" target="_blank">Gualterio</a>
+</footer>
+
+
+</body>
+</html>
