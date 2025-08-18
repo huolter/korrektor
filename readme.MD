@@ -13,3 +13,19 @@ The corrected text is automatically copied to your clipboard.
 - Copy-to-clipboard the clean text
 - Works directly in the browser (no backend needed)
 
+---
+
+## 📦 Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-username/email-style-corrector.git
+   cd email-style-corrector
+Open index.html in your browser.
+
+That’s it! 🎉
+
+---
+
+## 🤝 Contributing
+Suggestions and improvements are welcome!  
+If you’d like to propose changes, please open an [issue](../../issues) or create a pull request. 🚀
