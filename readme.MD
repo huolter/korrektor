@@ -1,4 +1,4 @@
-# ✨ Email Style Corrector
+# ✨ Email Style *KORREKTOR*
 
 A simple web app that uses the **OpenAI API** to correct and improve text style.  
 Paste your text on the left, click **Correct Text**, and get the polished version on the right.  
@@ -18,9 +18,9 @@ The corrected text is automatically copied to your clipboard.
 ## 📦 Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/email-style-corrector.git
+   git clone https://github.com/huolter/korrektor.git
    cd email-style-corrector
-Open index.html in your browser.
+Open korrektor.html in your browser.
 
 That’s it! 🎉
 
